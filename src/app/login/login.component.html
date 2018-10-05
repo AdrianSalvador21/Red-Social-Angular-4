@@ -1,0 +1,84 @@
+<!--NAVBAR LOGIN-->
+<nav class="row justify-content-center navbar navbar-expand-lg navbar-dark" style="background-color: #f8f5f5f8">
+    <a class="navbar-brand" href="#">
+        <img class="img-fluid mt-3" width="45px" src="../../assets/icono.png" alt="">
+    </a>
+</nav>
+
+
+<!--LOGIN-->
+<div *ngIf="mostrarLogin" class="row mt-5 justify-content-center">
+    <div class="col-10 col-sm-10 col-md-6 col-lg-4">
+        <p class="lead text-center">Iniciar Sesión!</p>
+        <form #forma2="ngForm" (ngSubmit)="iniciarSesion(forma2)">
+            <div class="form-group">
+                <input name="correo" ngModel type="email" class="form-control" aria-describedby="emailHelp" placeholder="Correo">
+            </div>
+            <div class="form-group">
+                <input name="contrasenia" ngModel type="password" class="form-control" placeholder="Contraseña">
+            </div>
+            <div class="form-group form-check">
+                <input name="recordar" ngModel type="checkbox" class="form-check-input">
+                <label class="form-text text-muted" for="exampleCheck1">Recordarme</label>
+            </div>
+            <button type="submit" class="btn botonInicio btn-sm mb-2">Ingresar</button>
+        </form>
+        <small (click)="mostrarLogin = !mostrarLogin" id="emailHelp" class="form-text text-muted cambiarInicio mb-3">¿No tienes una cuenta? Registrate aquí!</small>
+
+        <div *ngIf="inicioIncorrecto" class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Inicio incorrecto</h4>
+            <p class="lead">El correo y/o la contraseña ingresada son incorrectos.</p>
+            <hr>
+            <p class="mb-0">Si olvido su contraseña, por favor pulse aquí.</p>
+        </div>
+    </div>
+</div>
+
+
+<!--REGISTRO-->
+<div *ngIf="!mostrarLogin" class="row mt-5 justify-content-center">
+    <div class="col-10 col-sm-10 col-md-6 col-lg-4">
+        <p class="lead text-center">Registrate!</p>
+        <form #forma="ngForm" (ngSubmit)="registrarUsuario(forma)">
+            <div class="form-group">
+                <input ngModel type="text" class="form-control" aria-describedby="emailHelp" placeholder="Nombre" name="nombre">
+            </div>
+            <div class="form-group">
+                <input ngModel type="text" class="form-control" aria-describedby="emailHelp" placeholder="Apellido(s)" name="apellidos">
+            </div>
+            <div class="form-group">
+                <input ngModel type="email" class="form-control" aria-describedby="emailHelp" placeholder="Correo Electronico" name="correo">
+            </div>
+            <div class="form-group">
+                <input ngModel type="password" class="form-control" placeholder="Contraseña" name="contrasenia">
+            </div>
+            <div class="form-group">
+                <input ngModel type="password" class="form-control" placeholder="Confirmar contraseña" name="contrasenia2">
+            </div>
+            <button type="submit" class="btn botonInicio btn-sm mb-2">Registrar</button>
+        </form>
+        <small (click)="mostrarLogin = !mostrarLogin" id="emailHelp" class="form-text text-muted cambiarInicio mb-2">¿Si ya tienes una cuenta, inicia sesión aquí!</small>
+
+        <div *ngIf="usuarioYaRegistrado" class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Usuario ya registrado</h4>
+            <p class="lead">El correo con el que intenta ingresar ya está registrado! Por favor, inicia sesión.</p>
+            <hr>
+            <p class="mb-0">Si olvido su contraseña, por favor pulse aquí.</p>
+        </div>
+
+        <div *ngIf="correoNoValido" class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Correo no valido</h4>
+            <p class="lead">El correo ingresado no parece tener un formato valido. <br> Ejemplo: 'correo@correo.com'
+            </p>
+        </div>
+
+        <div *ngIf="registroCorrecto" class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Usuario Registrado!</h4>
+            <p>¡Ahora puedes iniciar sesión!</p>
+        </div>
+
+        <div *ngIf="contraseniaNoCoincide" class="alert alert-danger" role="alert">
+            <p>Las contraseñas no coinciden</p>
+        </div>
+    </div>
+</div>
